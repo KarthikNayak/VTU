@@ -12,44 +12,48 @@ int s[20], top = 0;		//s[20] stores the characters, acts like a temporary storag
 
 //push function takes characters and stores them in global array s temporarily to evaluvate the //term
 
-void push(int elem) {
+void push(int elem) 
+{
 	s[top] = elem;
 	top++;
 }
 
 //pop function
-int pop() {
+int pop() 
+{
 	top--;
 	return s[top];
 }
 
-void main() {
+void main() 
+{
 	char postfix[20], ch;
 	int i, op1, op2, res;
 	clrscr();
 	printf(“Postfix Expression Evaluvation\n”);
 	printf(“Enter the expression : \n”);
 	scanf(“ % s”, postfix);
-	for (i = 0; i < strlen(postfix); i++) {
+	for (i = 0; i < strlen(postfix); i++) 
+	{
 		ch = postfix[i];
 		if (isdigit(ch))
 		push(ch - ’0’)
-	else
-	{
-		op2 = pop();
-		op1 = pop();
-		switch (ch)
+		else
 		{
-			case ‘+’: res = op1 + op2; break;
-			case ‘-’: res = op1 - op2; break;
-			case ‘*’: res = op1 * op2; break;
-			case ‘/’: res = op1 / op2; break;
-			case ‘^’: res = pow(op1, op2); break;
-			default : printf(“Invalid Entry”);
+			op2 = pop();
+			op1 = pop();
+			switch (ch)
+			{
+				case ‘+’: res = op1 + op2; break;
+				case ‘-’: res = op1 - op2; break;
+				case ‘*’: res = op1 * op2; break;
+				case ‘/’: res = op1 / op2; break;
+				case ‘^’: res = pow(op1, op2); break;
+				default : printf(“Invalid Entry”);
+			}
+			push(res);
 		}
-		push(res);
 	}
-}
-printf(“Result expression : % d”, pop());
-getch();
+	printf(“Result expression : % d”, pop());
+	getch();
 }
