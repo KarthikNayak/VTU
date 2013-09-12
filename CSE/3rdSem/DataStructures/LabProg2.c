@@ -5,7 +5,7 @@ characters are taken as input and we assume that each character is postive*/
 #include <conio.h>      //For Clear Screen Function
 #include <stdio.h>      //For Std Input and Output
 #include <ctype.h>      //For String Length 
-#include <stdlib.h> 
+#include <stdlib.h> 	
 
 //Pre-pocessor derivatives
 
