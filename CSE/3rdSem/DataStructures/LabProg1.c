@@ -1,4 +1,5 @@
 /**
+* Data Structures Lab
 * Program to accept two polynomials, add them and print the resulting polynomial
 * This program uses linked lists to perform this task
 * This program is written for the Turbo C compiler and varies slightly if other compilers (like GCC) are used.
