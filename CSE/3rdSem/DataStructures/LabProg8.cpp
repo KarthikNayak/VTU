@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 class N_LIST
@@ -77,10 +77,10 @@ void L_LIST :: display()
   cout << "NULL" << endl;
 }
 
-void main()
+int main()
 {
   L_LIST LL;
-  int choice, rpt;
+  int choice, rpt=1;
   while(rpt)
     {
       cout << "\n\n\t1.Insert at front." << endl;
@@ -96,15 +96,16 @@ void main()
 	  break;
 	case 2:
 	  LL.delete_front();
-	  break
+	  break;
 	case 3:
 	  LL.display();
 	  break;
 	case 4:
-	  return;
+	  return 1;
 	}
 
       cout << "\tPress 1 to continue or 0 to exit." << endl;
       cin >> rpt;
     }
+    return 1;
 }
