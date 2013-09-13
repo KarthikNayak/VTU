@@ -2,18 +2,18 @@
  *Written for the G++ compiler
  */
 
-#include<iostream>
-#include<process>
+#include <iostream>
+using namespace std;
 
 class STACK
 {
   int a[10], size, top;
 public:
+  STACK(int n)
   {
     top = -1;
     size = n;
   }
-
   void operator + (int x);
   void operator - ();
   friend ostream &operator << (ostream &out, STACK &st);
@@ -56,11 +56,11 @@ int main ()
   STACK s1(n);
   while(1)
     {
-      cout << "1. Push" << endl;
+      cout << "\n1. Push" << endl;
       cout << "2. Pop" << endl;
       cout << "3. Display" << endl;
       cout << "4. Exit" << endl;
-      cout << "Enter your choice";
+      cout << "Enter your choice\t";
       cin >> ch;
       switch (ch)
 	{
@@ -80,7 +80,7 @@ int main ()
 	  break;
 
 	case 4:
-	  return;
+	  return 1;
 	}
     }
 }
