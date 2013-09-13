@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdlib.h>
+using namespace std;
 struct node
 {
 	int info;
@@ -8,7 +9,7 @@ struct node
 };
 class tree
 {
-	node *root
+	node *root;
 	public:tree()
 		{
 			root=NULL;
@@ -31,7 +32,7 @@ void tree :: display(int choice)
 		 					preorder(root);
 		 				}
 		 				break;
-		 	case 2:if(root==null)
+		 	case 2:if(root==NULL)
 		 				cout<<"tree is empty"<<endl;
 		 				else
 		 				{
@@ -103,7 +104,7 @@ void tree :: create(int item)
 	else
 		prev->rlink=temp;
 	}
-void main()
+int main()
 {
 	tree ob;
 	int item,choice;
@@ -127,5 +128,6 @@ void main()
 			default:exit(0);
 		}
 	}
+	return 1;
 }		
 
