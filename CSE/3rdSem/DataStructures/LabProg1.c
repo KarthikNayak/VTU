@@ -5,11 +5,14 @@
 * This program is written for the Turbo C compiler and varies slightly if other compilers (like GCC) are used.
 
 * TIP: TRACE THE PROGRAM STARTING AT THE main() FUNCTION
-*/
+Here we use a Linked List Type of Data structure*/
 
-#include<stdio.h> // For the std input and output functions -- scanf() and printf()
-#include<conio.h> // For the clrscr() and getch() functions
-#include<alloc.h> // For the malloc function
+
+//Header Files
+#include <stdio.h> // For the std input and output functions -- scanf() and printf()
+#include <stdlib.h> // For the malloc function in TurboC use alloc.h :)
+
+//Prepocessor Derivatives
 #define MALLOC(p,n,type) p=(type *) malloc (n*sizeof(type))
 /*
 *	Defines a macro that uses the malloc function. The malloc function accepts the amount of memory required.
@@ -32,13 +35,15 @@
 *	condition ? true-statement : false-statement;
 */
 
+//Structure which acts like a linked list data type 
 struct node 	//defines a structure node
 {
 	int coef; 	//will store the co-efficient of the polynomial
 	int expo;	//will store the exponent of the polynomial
-	struct node *link;	//creates a pointer of type node (which is a structure).
+	struct node *link;	//creates a pointer of type node (A pointer to the same structure type).
 };			// do not forget the trailing semi-colon!
 
+//Typedef is used to set datatypes of the users choice
 typedef struct node *NODE; // define a pointer of type node that will be identified (new type) by NODE
 
 void display (NODE head)
@@ -134,7 +139,6 @@ NODE polyadd (NODE head1, NODE head2, NODE head3)
 void main()
 {
 	NODE head1, head2, head3; // declare three variables of type NODE. Remember, NODE is defined as a pointer, so no memory is allocated to head1, head2 and head3. We are just created pointers to them.
-	clrscr(); // clears screen
 	MALLOC(head1, 1, struct node);
 	MALLOC(head2, 1, struct node);
 	MALLOC(head3, 1, struct node);
@@ -154,5 +158,4 @@ void main()
 	printf("\nPoly 3 (Addition of Poly 1 and 2: \n\n");
 	display(head3);
 	printf("\n\n\n");
-	getch();
 }

@@ -14,7 +14,7 @@ class EMPLOYEE
 {
   //private data members
  private:
-  int emp_code, basic_sanl, all_allowances;
+  int emp_code, basic_sal, all_allowances;
   int net_sal, gross_sal;
   float it;
   char emp_name[20];
