@@ -3,34 +3,30 @@ using namespace std;
 
 class N_LIST
 {
-public:
-  int data;
-  N_LIST *ptr;
-};
+  public:
+    int data;
+    N_LIST *ptr;
+};  
 
 class L_LIST
 {
-private:
-  N_LIST *head;
-
-public:
-  L_LIST()
-  {
-    head = NULL;
-  }
-
-  void insert_front();
-  int delete_front();
-  void display();
-
-  ~L_LIST()
-  {
-    delete head;
-  }
-
+  private:
+    N_LIST *head;
+  public:
+    L_LIST()
+    {
+      head = NULL;
+    }
+    void insert_front();
+    int delete_front();
+    void display();
+    ~L_LIST()
+    {
+      delete head;
+    }
 };
 
-void L_LIST :: insert_front()
+void L_LIST::insert_front()
 {
   N_LIST *newnode;
   int item;
@@ -42,7 +38,7 @@ void L_LIST :: insert_front()
   head = newnode;
 }
 
-int L_LIST :: delete_front()
+int L_LIST::delete_front()
 {
   N_LIST *temp;
   int item;
@@ -59,7 +55,7 @@ int L_LIST :: delete_front()
   return item;
 }
 
-void L_LIST :: display()
+void L_LIST::display()
 {
   N_LIST *temp;
   temp = head;
@@ -90,20 +86,19 @@ int main()
       cout << "\n\tEnter your choice: ";
       cin >> choice;
       switch(choice)
-	{
-	case 1:
-	  LL.insert_front();
-	  break;
-	case 2:
-	  LL.delete_front();
-	  break;
-	case 3:
-	  LL.display();
-	  break;
-	case 4:
-	  return 1;
-	}
-
+	     {
+        	case 1:
+        	  LL.insert_front();
+        	  break;
+        	case 2:
+        	  LL.delete_front();
+        	  break;
+        	case 3:
+        	  LL.display();
+        	  break;
+        	case 4:
+        	  return 1;
+	     }
       cout << "\tPress 1 to continue or 0 to exit." << endl;
       cin >> rpt;
     }
