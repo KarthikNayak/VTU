@@ -1,5 +1,6 @@
 #include<iostream>
-#include<iomanip.h>
+#include <iomanip>
+using namespace std;
 class OCTAL
 {
 	int num;
@@ -16,18 +17,19 @@ int operator+(OCTAL n1,OCTAL n2)
   }
  ostream & operator<<(ostream & print,OCTAL o)
   {
-    print<<setbase(8)<<o.num;
+    print<<setbase(8)<<o.num<<endl;;
     return print;
   } 
-  void main()
+  int main()
   {
    int x,k,y;
-   cout<<"enter the decimal no";
+   cout<<"enter the decimal no\n";
    cin>>x;
    OCTAL h=x;
-   cout<<"the convert 1sr OCTAL num is \n"<<h;
-   cout<<"enter the 2nd decimal num"<<"\n";
+   cout<<"the convert 1sr OCTAL num is\n"<<h;
+   cout<<"enter the 2nd decimal num\n";
    cin>>k;
    y=h+k;
    cout<<"addition of two octal nos is\n"<<y;
+   return 1;
   } 

@@ -23,8 +23,8 @@ Here we use a Linked List Type of Data structure*/
 *	malloc() returns a pointer to the variable that it has allocated memory for. This is explicitly converted
 	to a pointer of the type defined.
 */
-#define COMPARE(x,y) ((x==y)?0:(x>y)?1:-1)
 
+#define COMPARE(x,y) ((x==y)?0:(x>y)?1:-1)
 /*
 *	Defines a macro to compare two values x and y.
 *	If x is equal to y, it returns 0
@@ -94,9 +94,12 @@ NODE readpoly (NODE head)
 			break;
 		printf("Power of x = ");
 		scanf("%d", &expo); // accepts the power of the term
-		head = attach (coef, expo, head); // attaches the new term to the rest of the polynomial
+		/*now after the first term is taken we need to allocate memory
+		to the next term and also link this term to the next, now this is done
+		by the attach funtion*/
+		head = attach (coef, expo, head);
 	} // the process is continued for every term of the polynomial
-	return head; // returns the whole polynomial
+	return head; 
 }
 
 NODE polyadd (NODE head1, NODE head2, NODE head3)
@@ -138,24 +141,32 @@ NODE polyadd (NODE head1, NODE head2, NODE head3)
 
 void main()
 {
-	NODE head1, head2, head3; // declare three variables of type NODE. Remember, NODE is defined as a pointer, so no memory is allocated to head1, head2 and head3. We are just created pointers to them.
+	NODE head1, head2, head3; 
+	//Declare three variables of type NODE. 
+	//Remember, NODE is defined as a pointer, so no memory is allocated to head1, head2 and head3. We are just created pointers to them.
 	MALLOC(head1, 1, struct node);
 	MALLOC(head2, 1, struct node);
 	MALLOC(head3, 1, struct node);
 	// NODEs head1, head2 and head3 are dynamically allocated memory using the macro MALLOC.
-	head1->link = head1; // head1 (which contains the pointer to itself) is assigned to link member. Basically, head1->link points to head1
+	/* "->" is used as an alternative to (*ptr).member hence ptr->member
+	head1->link = head1; 
 	head2->link = head2;
 	head3->link = head3;
+	/*we're using the pointer within the structures to themselves 
+	as theyre not linked to other notes until values given*/
 	printf("Enter the first Polynomial\n");
-	head1 = readpoly(head1); // calls to readpoly() function to read in the entire polynomial
+	head1 = readpoly(head1);
 	printf("Enter the second Polynomial\n");
 	head2 = readpoly(head2);
+	//We Input the Two polynomials
 	head3 = polyadd (head1, head2, head3);
+	//We add the two polynomials and the sum is stored in head3
 	printf("\nPoly 1: ");
 	display(head1);
 	printf("\nPoly 2: ");
 	display(head2);
 	printf("\nPoly 3 (Addition of Poly 1 and 2: \n\n");
 	display(head3);
+	//We print the Inputs and Outputs
 	printf("\n\n\n");
 }
