@@ -4,8 +4,9 @@
 * This program uses linked lists to perform this task
 * This program is written for the Turbo C compiler and varies slightly if other compilers (like GCC) are used.
 
-* TIP: TRACE THE PROGRAM STARTING AT THE main() FUNCTION
-Here we use a Linked List Type of Data structure*/
+TRACE THE PROGRAM STARTING AT THE main() FUNCTION
+Here we use a Linked List Type of Data structure
+*/
 
 
 //Header Files
@@ -46,41 +47,6 @@ struct node 	//defines a structure node
 //Typedef is used to set datatypes of the users choice
 typedef struct node *NODE; // define a pointer of type node that will be identified (new type) by NODE
 
-void display (NODE head)
-{
-	NODE temp;
-	if (head->link == head)
-	{
-		printf("Polynomial does not exist\n");
-		return;
-	}
-	temp = head->link;
-	while (temp != head)
-	{
-		if (temp->coef < 0)
-			printf("%dx^%d ", temp->coef, temp->expo);
-		else
-		{
-			printf("%dx^%d ", temp->coef, temp->expo);
-			temp = temp->link;
-		}
-	}
-}	
-
-NODE attach(int coef, int expo, NODE head)
-{
-	NODE cur, temp;
-	MALLOC(temp, 1, struct node);
-	temp->coef = coef;
-	temp->expo = expo;
-	cur = head->link;
-	while(cur->link != head)
-		cur = cur->link;
-	cur->link = temp;
-	temp->link = head;
-	return head;
-}
-
 NODE readpoly (NODE head)
 {
 	int i=1, coef, expo;
@@ -102,42 +68,113 @@ NODE readpoly (NODE head)
 	return head; 
 }
 
+/*This the integral  part of the program what attach basically does is 
+makes a new node and points the link pointer of the last node connected
+to the node passed to the newly made node and sets its value by the parameters
+recieved and points the link of the newly made node to the node recieved */ 
+NODE attach(int coef, int expo, NODE head)
+{
+	NODE cur, temp;
+	//two pointers to node structure are made 
+	MALLOC(temp, 1, struct node);
+	//temp is allocated memory using the malloc function
+	temp->coef = coef;
+	temp->expo = expo;
+	//the value of temps coef and expo is set to the values passed
+	cur = head->link;
+	//cur now points to the link in head
+	while(cur->link != head)
+		cur = cur->link;
+	//now we keep a loop to check which is the last node in the whole link
+	//of the node recieved and set cur to point to the last loop
+	cur->link = temp;
+	//now the last node links to temp
+	temp->link = head;
+	//temp now links to the head
+	return head;
+	//return the head :)
+}
+
+/*poly add is used to add the two polynomials and store the result 
+in the node head3*/
 NODE polyadd (NODE head1, NODE head2, NODE head3)
 {
 	NODE a, b;
+	//two pointers to the node structure 
 	int coef;
 	a = head1->link;
 	b = head2->link;
+	//set a to the first node in head1 and b to first node in head2
+	//this while loop is exectued till neither reaches end 
 	while(a != head1 && b != head2)
 	{
+		//we use compare as only exponentials of the same order can be added
 		switch(COMPARE(a->expo, b->expo))
-		{
+		{	
+			/*case 0 is when they are equal here we add them regularly and
+			sent the value to head3 using attach function (remember how it links
+			new nodes to the one sent)*/
 			case 0: coef = a->coef + b->coef;
+					//if sum of coef is 0 we dont have to send it to the head3 node
 					if (coef != 0)
 						head3 = attach (coef, a->expo, head3);
 					a = a->link;
 					b = b->link;
+					//since the both the nodes are used we use the link
+					//in them to go to the next node
 					break;
-			case 2: head3 = attach (a->coef, a->expo, head3);
+			/*case 1 is when a is ahead of b so we only send the value in a to head3*/
+			case 1: head3 = attach (a->coef, a->expo, head3);
 					a = a->link;
+					//since the node is used we go to the next node
 					break;
+			/*case default is when b is ahead of a so we only send the value in b to head3*/
 			default: head3 = attach (b->coef, b->expo, head3);
 					b = b->link;
 		}
 	}
-
+	/*here we check the condition when b has reached the last term 
+	but a still has terms left*/
 	while(a != head1)
 	{
 		head3 = attach (a->coef, a->expo, head3);
 		a = a->link;
 	}
+	/*here we check the condition when a has reached the last term 
+	but b still has terms left*/
 	while(b != head2)
 	{
 		head3 = attach (b->coef, b->expo, head3);
 		b = b->link;
 	}
 	return head3;
+	//return head
 }
+
+/*Displays the result*/
+void display (NODE head)
+{
+	NODE temp;
+	// if head points to itself no polynomial has been entered
+	if (head->link == head)
+	{
+		printf("Polynomial does not exist\n");
+		return;
+	}
+	//else we link temp to the node pointed by head and print 
+	//all nodes till head
+	temp = head->link;
+	while (temp != head)
+	{
+		if (temp->coef < 0)
+			printf("%dx^%d ", temp->coef, temp->expo);
+		else
+		{
+			printf("%dx^%d ", temp->coef, temp->expo);
+			temp = temp->link;
+		}
+	}
+}	
 
 void main()
 {
