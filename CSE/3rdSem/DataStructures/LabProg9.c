@@ -1,6 +1,12 @@
-#include<stdio.h>
-#include<alloc.h>
+/*Program to search a m*n mantrix for the key
+element using a strcuture and pointers */
 
+//header files
+#include <stdio.h>
+//#include <alloc.h> for TUBROC++
+#include <stdlib.h> //Gcc 
+
+//Structure
 struct sparse
 {
   int data, row, col;
