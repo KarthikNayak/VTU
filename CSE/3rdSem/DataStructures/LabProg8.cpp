@@ -1,13 +1,22 @@
-#include <iostream>
-using namespace std;
+/*
+ * This program is written for the G++ compiler and varies slightly if other compilers like Turbo C++ are used.
+ * This program will demonstrate a linked list; similar to "LabProg1.c"
+ */
 
+#include <iostream>
+using namespace std; // This statement can be omitted if the Turbo C++ compiler is used.
+
+
+/* Define a class that will be used to store the data. */
 class N_LIST
 {
   public:
-    int data;
-    N_LIST *ptr;
+    int data;   // Will contain hold the element (aka data)
+    N_LIST *ptr; //Will contain the link of the next node.
 };  
 
+
+/* Define a class that will be used to make and maintain the linked lists. */
 class L_LIST
 {
   private:
@@ -30,10 +39,20 @@ void L_LIST::insert_front()
 {
   N_LIST *newnode;
   int item;
-  newnode = new N_LIST;
+  newnode = new N_LIST; // dynamically allocate memory and point the pointer *newnode to it. That is, the address of the allocated memory is stored as the value of newnode.
   cout << "\tEnter the element to be inserted: ";
-  cin >> item;
-  newnode->data = item;
+  cin >> item; 
+  newnode->data = item; // Store the just input data into the data member of newnode which is of type N_LIST.
+  /* Assign the value of head to ptr member of the newnode object (which is of class N_LIST).
+   * 'head' is the first element of the list. It contains the address of the last element in the list.
+   * Eg: head -> node1 -> node2 -> node3 -> NULL. Remember NULL was the initial value of head.
+   * 0 elements:
+            head -> NULL
+     1 element:
+            head -> node1 -> NULL
+     2 elements:
+            head -> node2 -> node1 -> NULL
+   */
   newnode->ptr = head;
   head = newnode;
 }
@@ -102,5 +121,5 @@ int main()
       cout << "\tPress 1 to continue or 0 to exit." << endl;
       cin >> rpt;
     }
-    return 1;
+  return 0; // Program successfully completed.
 }
