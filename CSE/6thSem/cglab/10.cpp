@@ -10,12 +10,10 @@ GLfloat x0=50,y0=50;  // initial values for x, y
 GLint i,j;
 void init()
 {
-    glClearColor(1.0,1.0,1.0,1.0);
 	glColor3f(1.0,0.0,0.0);
 	glPointSize(5.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0.0,500.0,0.0,500.0);
 	glutPostRedisplay(); 		// request redisplay
 }
 
@@ -28,21 +26,20 @@ void display(void)
 /* draw rectangles */
 	 for(i=0;i<maxx;i++)
 		 x[i]=x0+i*dx;    // compute x[i]
-		for(j=0;j<maxy;j++)
-			y[j]=y0+j*dy;  // compute y[i]
-		
-		glColor3f(0.0, 0.0, 1.0);	
-		for(i=0;i<maxx-1;i++)
-		for(j=0;j<maxy-1;j++)
+ 	 for(j=0;j<maxy;j++)
+	 	 y[j]=y0+j*dy;  // compute y[i]
+	 glColor3f(0.0, 0.0, 1.0);	
+	 for(i=0;i<maxx-1;i++)
+	 	for(j=0;j<maxy-1;j++)
 		{
-			glColor3f(0.0, 0.0, 1.0);
-		glBegin(GL_LINE_LOOP);
-		glVertex2f(x[i],y[j]);
-		glVertex2f(x[i],y[j+1]);
-		glVertex2f(x[i+1],y[j+1]);
-		glVertex2f(x[i+1],y[j]);
-  		glEnd();
-		glFlush(); 
+		    glColor3f(0.0, 0.0, 1.0);
+		    glBegin(GL_LINE_LOOP);
+			glVertex2f(x[i],y[j]);
+			glVertex2f(x[i],y[j+1]);
+			glVertex2f(x[i+1],y[j+1]);
+			glVertex2f(x[i+1],y[j]);
+  		    glEnd();
+		    glFlush(); 
 		}
 	glFlush(); 
 	
@@ -51,13 +48,14 @@ void display(void)
 
 int main(int argc, char* argv[])
 {
-glutInit(&argc, argv); // OpenGL initializations
-glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);// single buffering and RGB
-glutInitWindowSize(500, 500); // create a 500x400 window
-glutInitWindowPosition(0, 0); // ...in the upper left
-glutCreateWindow("Rectangular Mesh"); // create the window
-glutDisplayFunc(display); // setup callbacks
-init();
-glutMainLoop(); // start it running
-return 1;
+	glutInit(&argc, argv); // OpenGL initializations
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);// single buffering and RGB
+	glutInitWindowSize(500, 500); // create a 500x400 window
+	glutInitWindowPosition(0, 0); // ...in the upper left
+	glutCreateWindow("Rectangular Mesh"); // create the window
+	glutDisplayFunc(display); // setup callbacks
+	glClearColor(1.0,1.0,1.0,1.0);
+	gluOrtho2D(0.0,500.0,0.0,500.0);
+	glutMainLoop(); 
+	return 1;
 }

@@ -150,15 +150,6 @@ CohenSutherlandLineClipAndDraw(x0,y0,x1,y1);
 CohenSutherlandLineClipAndDraw(60,20,80,120);
 glFlush();
 }
-void myinit()
-{
-	glClearColor(1.0,1.0,1.0,1.0);
-	glColor3f(1.0,0.0,0.0);
-	glPointSize(1.0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0.0,499.0,0.0,499.0);
-}
 int main(int argc, char** argv)
 {
 	//int x1, x2, y1, y2;
@@ -171,7 +162,9 @@ int main(int argc, char** argv)
 	glutInitWindowPosition(0,0);
 	glutCreateWindow("Cohen Suderland Line Clipping Algorithm");
 	glutDisplayFunc(display);
-	myinit();
+	glClearColor(1.0,1.0,1.0,1.0);
+	gluOrtho2D(0.0,499.0,0.0,499.0);
+
 	glutMainLoop();
-return 1;
+	return 1;
 }

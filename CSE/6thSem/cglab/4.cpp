@@ -40,76 +40,40 @@ void rotate()
 }
 void drawhouse(GLfloat houses[3][9])
 {
-glColor3f(0.0, 0.0, 1.0);
+	glColor3f(0.0, 0.0, 1.0);
 
-glBegin(GL_POLYGON);
-glColor3f(0.0, 0.0, 1.0);
-  glVertex2f(houses[0][0],houses[1][0]);
-  glVertex2f(houses[0][1],houses[1][1]);
-  glVertex2f(houses[0][3],houses[1][3]);
-  glVertex2f(houses[0][4],houses[1][4]);
-  glEnd();
-glColor3f(1.0,0.0,0.5);
-  glBegin(GL_POLYGON);
-glColor3f(1.0,0.0,0.5);
-  glVertex2f(houses[0][5],houses[1][5]);
-  glVertex2f(houses[0][6],houses[1][6]);
-  glVertex2f(houses[0][7],houses[1][7]);
-  glVertex2f(houses[0][8],houses[1][8]);
-  glEnd();
-glColor3f(0.20, 0.50, 01.0);
-  glBegin(GL_TRIANGLES);
-glColor3f(0.20, 0.50, 01.0);
-  glVertex2f(houses[0][1],houses[1][1]);
-  glVertex2f(houses[0][2],houses[1][2]);
-  glVertex2f(houses[0][3],houses[1][3]);
-  glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(0.0, 0.0, 1.0);
+	  glVertex2f(houses[0][0],houses[1][0]);
+	  glVertex2f(houses[0][1],houses[1][1]);
+	  glVertex2f(houses[0][3],houses[1][3]);
+	  glVertex2f(houses[0][4],houses[1][4]);
+         glEnd();
+	glColor3f(1.0,0.0,0.5);
+	glBegin(GL_POLYGON);
+	 glColor3f(1.0,0.0,0.5);
+	 glVertex2f(houses[0][5],houses[1][5]);
+ 	 glVertex2f(houses[0][6],houses[1][6]);
+ 	 glVertex2f(houses[0][7],houses[1][7]);
+ 	 glVertex2f(houses[0][8],houses[1][8]);
+	glEnd();
+	glColor3f(0.20, 0.50, 01.0);
+	glBegin(GL_TRIANGLES);
+  	 glColor3f(0.20, 0.50, 01.0);
+  	 glVertex2f(houses[0][1],houses[1][1]);
+  	 glVertex2f(houses[0][2],houses[1][2]);
+  	 glVertex2f(houses[0][3],houses[1][3]);
+  	glEnd();
 }
-/*void drawrotatedhouse()
-{
-glColor3f(0.0, 0.0, 1.0);
-
-glBegin(GL_LINE_LOOP);
-  glVertex2f(result[0][0],result[1][0]);
-  glVertex2f(result[0][1],result[1][1]);
-  glVertex2f(result[0][3],result[1][3]);
-  glVertex2f(result[0][4],result[1][4]);
-  glEnd();
-glColor3f(1.0,0.0,0.0);
-  glBegin(GL_LINE_LOOP);
-  glVertex2f(result[0][5],result[1][5]);
-  glVertex2f(result[0][6],result[1][6]);
-  glVertex2f(result[0][7],result[1][7]);
-  glVertex2f(result[0][8],result[1][8]);
-  glEnd();
-glColor3f(0.0, 01.0, 0.0);
-  glBegin(GL_LINE_LOOP);
-  glVertex2f(result[0][1],result[1][1]);
-  glVertex2f(result[0][2],result[1][2]);
-  glVertex2f(result[0][3],result[1][3]);
-  glEnd();
-
-}
-*/
 void display()
 {
 	
-glClear(GL_COLOR_BUFFER_BIT);	
-theta=rad;
-drawhouse(house);
-rotate();
-drawhouse(result);
-glFlush();
-}
-
-void myinit()
-{
-	glClearColor(1.0,1.0,1.0,1.0);
-	glColor3f(1.0,0.0,0.0);
-	glPointSize(1.0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0.0,499.0,0.0,499.0);
+	glClear(GL_COLOR_BUFFER_BIT);	
+	theta=rad;
+	drawhouse(house);
+	rotate();
+	drawhouse(result);
+	glFlush();
 }
 
 int main(int argc, char* argv[])
@@ -124,7 +88,8 @@ int main(int argc, char* argv[])
 	glutInitWindowPosition(0,0);
 	glutCreateWindow("house rotation");
 	glutDisplayFunc(display);
-	myinit();
+	glClearColor(1.0,1.0,1.0,1.0);
+	gluOrtho2D(0,499,0,499);
 	glutMainLoop();
         return 1;
 }

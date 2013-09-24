@@ -6,10 +6,8 @@ typedef float point[3];
 
 /* initial tetrahedron */
 
-point v[]={{0.0, 0.0, 1.0}, {0.0, 0.942809, -0.33333},
-          {-0.816497, -0.471405, -0.333333}, {0.816497, -0.471405, -0.333333}};
-
-static GLfloat theta[] = {0.0,0.0,0.0};
+point v[]={{0.0, 0.0, 1.0}, {0.0, 0.9, -0.3},
+          {-0.8, -0.4, -0.3}, {0.8, -0.4, -0.3}};
 
 int n;
 
@@ -64,9 +62,8 @@ void tetrahedron( int m)
 void display(void)
 {
 
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	   glLoadIdentity();
+    glLoadIdentity();
     tetrahedron(n);
     glFlush();
 }
@@ -90,18 +87,18 @@ void myReshape(int w, int h)
 
 int main(int argc, char *argv[])
 {
-    //n=atoi(argv[1]);
-	printf(" No. of Divisions ? ");
-	scanf("%d",&n);
+   
+    printf(" No. of Divisions ? ");
+    scanf("%d",&n);
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(500, 500);
     glutCreateWindow("3D Gasket");
     glutReshapeFunc(myReshape);
     glutDisplayFunc(display);
-	glEnable(GL_DEPTH_TEST); 
+    glEnable(GL_DEPTH_TEST); 
     glClearColor (1.0, 1.0, 1.0, 1.0);
     glutMainLoop();
-return 1;
+    return 1;
 }
 

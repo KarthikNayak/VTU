@@ -10,6 +10,10 @@
 	{1.0,1.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0}, 
 	{1.0,0.0,1.0}, {1.0,1.0,1.0}, {0.0,1.0,1.0}};
 
+	static GLfloat theta[] = {0.0,0.0,0.0};
+	static GLint axis = 2;
+	static GLdouble viewer[]= {0.0, 0.0, 5.0}; /* initial viewer location */
+
 void polygon(int a, int b, int c , int d)
 {
 	glBegin(GL_POLYGON);
@@ -23,7 +27,7 @@ void polygon(int a, int b, int c , int d)
 		glVertex3fv(vertices[d]);
 	glEnd();
 																										}
-
+}
 void colorcube()
 {
 	polygon(0,3,2,1);
@@ -34,9 +38,6 @@ void colorcube()
 	polygon(0,1,5,4);
 }
 
-static GLfloat theta[] = {0.0,0.0,0.0};
-static GLint axis = 2;
-static GLdouble viewer[]= {0.0, 0.0, 5.0}; /* initial viewer location */
 
 void display(void)
 {
@@ -45,19 +46,17 @@ void display(void)
 
 /* Update viewer position in modelview matrix */
 
-	glLoadIdentity();
-	gluLookAt(viewer[0],viewer[1],viewer[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+ glLoadIdentity();
+ gluLookAt(viewer[0],viewer[1],viewer[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
 /* rotate cube */
 
-	glRotatef(theta[0], 1.0, 0.0, 0.0);
-	glRotatef(theta[1], 0.0, 1.0, 0.0);
-	glRotatef(theta[2], 0.0, 0.0, 1.0);
-
+ glRotatef(theta[0], 1.0, 0.0, 0.0);
+ glRotatef(theta[1], 0.0, 1.0, 0.0);
+ glRotatef(theta[2], 0.0, 0.0, 1.0);
  colorcube();
-
  glFlush();
-	glutSwapBuffers();
+ glutSwapBuffers();
 }
 
 void mouse(int btn, int state, int x, int y)
@@ -92,15 +91,10 @@ void myReshape(int w, int h)
 
  glMatrixMode(GL_PROJECTION); 
  glLoadIdentity();
-	if(w<=h) glFrustum(-2.0, 2.0, -2.0 * (GLfloat) h/ (GLfloat) w, 
-       2.0* (GLfloat) h / (GLfloat) w, 2.0, 20.0);
-	else glFrustum(-2.0, 2.0, -2.0 * (GLfloat) w/ (GLfloat) h, 
-       2.0* (GLfloat) w / (GLfloat) h, 2.0, 20.0);
-
-/* Or we can use gluPerspective */
-
- /* gluPerspective(45.0, w/h, -10.0, 10.0); */
-
+ if(w<=h) 
+	glFrustum(-2.0, 2.0, -2.0 * (GLfloat) h/ (GLfloat) w,2.0* (GLfloat) h / (GLfloat) w, 2.0, 20.0);
+ else
+	 glFrustum(-2.0, 2.0, -2.0 * (GLfloat) w/ (GLfloat) h,2.0* (GLfloat) w / (GLfloat) h, 2.0, 20.0);
  glMatrixMode(GL_MODELVIEW);
 }
 
@@ -112,9 +106,9 @@ int  main(int argc, char **argv)
  glutCreateWindow("Colorcube Viewer");
  glutReshapeFunc(myReshape);
  glutDisplayFunc(display);
-	glutMouseFunc(mouse);
-	glutKeyboardFunc(keys);
-	glEnable(GL_DEPTH_TEST);
+ glutMouseFunc(mouse);
+ glutKeyboardFunc(keys);
+ glEnable(GL_DEPTH_TEST);
  glutMainLoop();
-return 1;
+ return 1;
 }

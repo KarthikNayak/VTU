@@ -5,16 +5,17 @@
 
 	GLfloat vertices[][3] = {{-1.0,-1.0,-1.0},{1.0,-1.0,-1.0},
 	{1.0,1.0,-1.0}, {-1.0,1.0,-1.0}, {-1.0,-1.0,1.0}, 
-	{1.0,-1.0,1.0}, {1.0,1.0,1.0}, {-1.0,1.0,1.0}};
+	{1.0,-1.0,1.0}, {1.0,1.0,1.0}, {-1.0,1.0,1.0}}; //co-ordinates of cube of unit length with origin at center of the cube
 
 	GLfloat colors[][3] = {{0.0,0.0,0.0},{1.0,0.0,0.0},
 	{1.0,1.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0}, 
-	{1.0,0.0,1.0}, {1.0,1.0,1.0}, {0.0,1.0,1.0}};
+	{1.0,0.0,1.0}, {1.0,1.0,1.0}, {0.0,1.0,1.0}}; //define some arbitary colors for each face of the cube
 
 void polygon(int a, int b, int c , int d)
 {
 
 /* draw a polygon via list of vertices */
+//drawing each face of the cube
 
  	glBegin(GL_POLYGON);
 		glColor3fv(colors[a]);
@@ -32,7 +33,7 @@ void colorcube(void)
 {
 
 /* map vertices to faces */
-
+//draw the faces of the cube
 	polygon(0,3,2,1);
 	polygon(2,3,7,6);
 	polygon(0,4,7,3);
@@ -50,11 +51,11 @@ void display(void)
    rotate cube and draw, swap buffers */
 
  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
-	glRotatef(theta[0], 1.0, 0.0, 0.0);
-	glRotatef(theta[1], 0.0, 1.0, 0.0);
-	glRotatef(theta[2], 0.0, 0.0, 1.0);
-
+ glLoadIdentity();
+ glRotatef(theta[0], 1.0, 0.0, 0.0);
+ glRotatef(theta[1], 0.0, 1.0, 0.0);
+ glRotatef(theta[2], 0.0, 0.0, 1.0);
+//draw the cube
  colorcube();
 
  glFlush();
@@ -67,8 +68,8 @@ void spinCube()
 /* Idle callback, spin cube 2 degrees about selected axis */
 
 	theta[axis] += 1.0;
-	if( theta[axis] > 360.0 ) theta[axis] -= 360.0;
-	glutPostRedisplay();
+	if( theta[axis] > 360.0 ) theta[axis] -= 360.0;//since angle cannot be greater than 360 degrees
+	glutPostRedisplay(); 
 }
 
 void mouse(int btn, int state, int x, int y)
