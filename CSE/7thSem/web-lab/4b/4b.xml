@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="4b.xsl"?>
+<Student>
+<Student_Info>
+<USN>1BY10CS053</USN>
+<NAME>Sukruth Gowda</NAME>
+<COLLEGE>BMSIT</COLLEGE>
+<BRANCH>CSE</BRANCH>
+<YOJ>2010</YOJ>
+<Email>smail@gmail.com </Email>
+</Student_Info>
+</Student>
