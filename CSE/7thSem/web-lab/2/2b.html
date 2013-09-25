@@ -1,0 +1,38 @@
+<html>
+	<script type="text/javascript">
+	finder=function()
+	{
+		a=document.getElementById('txtbox').value;
+		s=document.getElementById('sembox').value;
+		if(a.length == 0 || s.length == 0)
+			{
+				alert("One of the fields is empty");
+				return;
+			}
+		b=a.toLowerCase();
+		var st=b.search(/^[1-4][a-z][a-z][0-9][0-9][a-z][a-z][0-9][0-9][0-9]/);
+		var usn_flag=1;
+		var sem_flag=1;
+		if(st==0) 
+			usn_flag=0;
+		st=s.search(/^[1-4]$/);
+		if(st==0)
+			sem_flag=0;
+		if(sem_flag && usn_flag)
+			alert("Both SEM and USN are invalid");
+		else if(!sem_flag && usn_flag )
+			alert("USN is invalid, Sem is valid");
+		else if(!usn_flag && sem_flag)
+			alert("Sem is invalid, USN is valid");
+		else
+			alert("Both SEM and USN are valid");
+		
+	}
+	</script>
+	<form onsubmit="finder()">
+		Enter USN : <input id="txtbox" type="text"><br>
+		Enter SEM  : <input id="sembox" type="text"><br>
+		<input type=submit value="Submit">
+	</form>
+</html>
+

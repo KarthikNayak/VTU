@@ -1,0 +1,66 @@
+<html>
+ <head>
+  <style type="text/css">
+	.layer1Style
+	{
+		border: solid thick black;
+		width:300px;
+		background-color:yellow;
+		top:200px;
+		left:400px;
+	}
+	.layer2Style
+	{
+		border: solid thick red;
+		width:300px;
+		background-color:BLUE;
+		top:220px;
+		left:420px;
+	}
+	.layer3Style
+	{
+		border: solid thick green;
+		width:300px;
+		background-color:purple;
+		top:240px;
+		left:440px;
+	}
+	div
+	{
+		padding: 1em;
+		position:absolute;
+
+	}
+  </style>
+  <script type="text/javascript">
+	var topLayer="layer3";
+	var origPos;
+	function mover(toTop,pos)
+	{
+		var oldTop=document.getElementById(topLayer).style;
+		var newTop=document.getElementById(toTop).style;
+		oldTop.zIndex="0";
+		newTop.zIndex="10";
+		topLayer=document.getElementById(toTop).id;
+		origPos=pos;
+	}
+	function moveBack()
+	{ 
+ 		//Needs improvement 
+		document.getElementById(topLayer).style.zIndex=origPos;
+	}
+  </script>
+ </head>
+ <body>
+	<div style="z-index: 10;" class="layer1Style" id="layer1" onmouseout="mover('layer1')" onmousemover="moveBack()">
+		Layer1
+	</div>
+	<div style="z-index: 2;" class="layer2Style" id="layer2" onmouseout="mover('layer2')" onmousemover="moveBack()">
+		Layer2
+	</div>
+	<div style="z-index: 0;" class="layer3Style" id="layer3" onmouseout="mover('layer3')" onmousemover="moveBack()">
+		Layer3
+	</div>
+ </body>
+</html>
+

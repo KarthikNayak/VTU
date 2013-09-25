@@ -1,0 +1,28 @@
+<?xml version = "1.0"?>
+<?xml-stylesheet type = "text/xsl" href = "4a.xsl" ?>
+<students>
+<VTU>
+<USN> 1BY10CS012 </USN>
+<name> Guru Prasad </name>
+<college> BMSIT </college>
+<branch> CSE</branch>
+<YOJ> 2010 </YOJ>
+<email> gp@gmail.com </email>
+</VTU>
+<VTU>
+<USN> 1BY10CS053</USN>
+<name> SukruthGowda</name>
+<college> BMSIT </college>
+<branch>CSE </branch>
+<YOJ>2010</YOJ>
+<email>smail@gmail.com </email>
+</VTU>
+<VTU>
+<USN> 1BY10CS001</USN>
+<name>Abhishekbose</name>
+<college> BMSIT</college>
+<branch> CSE </branch>
+<YOJ>2010</YOJ>
+<email>abh@yahoo.com </email>
+</VTU>
+</students>
