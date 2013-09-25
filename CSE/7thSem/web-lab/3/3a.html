@@ -1,0 +1,59 @@
+<html>
+ <head>
+  <style type="text/css">
+	.layer1Style
+	{
+		border: solid thick black;
+		width:300px;
+		background-color:yellow;
+		top:100px;
+		left:200px;
+	}
+	.layer2Style
+	{
+		border: solid thick red;
+		width:300px;
+		background-color:BLUE;
+		top:120px;
+		left:220px;
+	}
+	.layer3Style
+	{
+		border: solid thick green;
+		width:300px;
+		background-color:purple;
+		top:140px;
+		left:240px;
+	}
+	div
+	{
+		padding: 1em;
+		position:absolute;
+
+	}
+  </style>
+  <script type="text/javascript">
+	var topLayer="layer3";
+	function mover(toTop)
+	{
+		var oldTop=document.getElementById(topLayer).style;
+		var newTop=document.getElementById(toTop).style;
+		oldTop.zIndex="0";
+		newTop.zIndex="10";
+		topLayer=document.getElementById(toTop).id;
+	}
+  </script>
+ </head>
+ <body>
+	<div style="z-index: 10;" class="layer1Style" id="layer1" onmouseover="mover('layer1')">
+		Layer1
+	</div>
+	<div style="z-index: 2;" class="layer2Style" id="layer2" onmouseover="mover('layer2')">
+		Layer2
+	</div>
+	<div style="z-index: 0;" class="layer3Style" id="layer3" onmouseover="mover('layer3')">
+		Layer3
+	</div>
+ </body>
+</html>
+
