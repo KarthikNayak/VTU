@@ -6,7 +6,7 @@
 		border: solid thick black;
 		width:300px;
 		background-color:yellow;
-		top:200px;
+		top:100px;
 		left:400px;
 	}
 	.layer2Style
