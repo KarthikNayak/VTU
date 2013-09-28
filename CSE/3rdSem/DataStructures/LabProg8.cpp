@@ -10,29 +10,29 @@ using namespace std; // This statement can be omitted if the Turbo C++ compiler 
 /* Define a class that will be used to store the data. */
 class N_LIST
 {
-  public:
-    int data;   // Will contain hold the element (aka data)
-    N_LIST *ptr; //Will contain the link of the next node.
+public:
+  int data;   // Will contain hold the element (aka data)
+  N_LIST *ptr; //Will contain the link of the next node.
 };  
 
 
 /* Define a class that will be used to make and maintain the linked lists. */
 class L_LIST
 {
-  private:
-    N_LIST *head;
-  public:
-    L_LIST()
-    {
-      head = NULL;
-    }
-    void insert_front();
-    int delete_front();
-    void display();
-    ~L_LIST()
-    {
-      delete head;
-    }
+private:
+  N_LIST *head;
+public:
+  L_LIST()
+  {
+    head = NULL;
+  }
+  void insert_front();
+  int delete_front();
+  void display();
+  ~L_LIST()
+  {
+    delete head;
+  }
 };
 
 void L_LIST::insert_front()
@@ -47,12 +47,12 @@ void L_LIST::insert_front()
    * 'head' is the first element of the list. It contains the address of the last element in the list.
    * Eg: head -> node1 -> node2 -> node3 -> NULL. Remember NULL was the initial value of head.
    * 0 elements:
-            head -> NULL
-     1 element:
-            head -> node1 -> NULL
-     2 elements:
-            head -> node2 -> node1 -> NULL
-   */
+   head -> NULL
+   * 1 element:
+   head -> node1 -> NULL
+   * 2 elements:
+   head -> node2 -> node1 -> NULL
+  */
   newnode->ptr = head;
   head = newnode;
 }
@@ -105,19 +105,19 @@ int main()
       cout << "\n\tEnter your choice: ";
       cin >> choice;
       switch(choice)
-	     {
-        	case 1:
-        	  LL.insert_front();
-        	  break;
-        	case 2:
-        	  LL.delete_front();
-        	  break;
-        	case 3:
-        	  LL.display();
-        	  break;
-        	case 4:
-        	  return 1;
-	     }
+	{
+	case 1:
+	  LL.insert_front();
+	  break;
+	case 2:
+	  LL.delete_front();
+	  break;
+	case 3:
+	  LL.display();
+	  break;
+	case 4:
+	  return 1;
+	}
       cout << "\tPress 1 to continue or 0 to exit." << endl;
       cin >> rpt;
     }

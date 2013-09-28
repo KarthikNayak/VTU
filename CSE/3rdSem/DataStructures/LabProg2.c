@@ -1,5 +1,7 @@
-/* Takes a regular expression and converts it a postfix expression. 
+/* Takes an infix expression and converts it a postfix expression. 
 characters are taken as input and we assume that each character is postive*/
+
+//Caution: Unless where explicitly defining a string, you must use single quotes and not double quotes. C will automatically add a null character to a double quoted string.
 
 //Header Files
 #include <stdio.h>
@@ -7,7 +9,7 @@ characters are taken as input and we assume that each character is postive*/
 #include <ctype.h>   
 //For string length    
 #include <string.h>
-//For checking wether alphabet/numerical		
+//For checking whether alphabet/numerical		
 
 //Pre-pocessor derivatives
 //Here we take twenty to be the maximum size of input taken
