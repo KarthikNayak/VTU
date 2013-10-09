@@ -5,6 +5,7 @@ $q=new CGI;
 $nm=$q->param("pname");
 $age=$q->param("age");
 $db=DBI->connect('DBI:mysql:dbname','root','password');
+##connect takes 3 parameters dbtype:dbname, username, password
 $st="insert into age_info values ('$nm',$age)";
 $q=$db->prepare($st);
 $q->execute();
