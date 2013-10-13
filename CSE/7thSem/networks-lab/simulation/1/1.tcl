@@ -48,7 +48,7 @@ $ns attach-agent $n0 $udp0
 #Set CBR0 over UDP0
 set cbr0 [new Application/Traffic/CBR]
 $cbr0 attach-agent $udp0
-$cbr0 set packet_size_ 1000
+$cbr0 set packet_size_ 500
 
 #Set UDP1 connection
 set udp1 [new Agent/UDP]
