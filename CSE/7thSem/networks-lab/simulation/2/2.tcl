@@ -25,7 +25,7 @@ $ns duplex-link $n0 $n2 10Mb 10ms DropTail
 $ns duplex-link $n1 $n2 10Mb 10ms DropTail
 $ns duplex-link $n2 $n3 10Mb 1ms DropTail
 
-#Attach UDP agents
+#Attach TCP agents
 set tcp0 [new Agent/TCP]
 $ns attach-agent $n0 $tcp0
 
@@ -52,7 +52,6 @@ $ns attach-agent $n3 $null
 #Assign colors to flows
 $tcp0 set class_ 1
 $udp set class_ 2
-
 #Assign some properties
 $ftp0 set packetSize_ 90
 $ftp0 set interval_ 0.01
