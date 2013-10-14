@@ -6,7 +6,6 @@
 int main(int argc,char *argv[])
 {
 	int fd;
-	char *file=argv[1];
 	char buffer[255];
 	struct flock fvar;
 	if(argc==1)
@@ -14,7 +13,7 @@ int main(int argc,char *argv[])
 		printf("usage:./a.out filename\n");
 		return -1;
 	}
-	if((fd=open(file,O_RDWR))==-1)
+	if((fd=open(argv[1],O_RDWR))==-1)
 	{
 		perror("open");
 		exit(1);
