@@ -23,7 +23,7 @@ $n3 label "dest"
 #Create links
 $ns duplex-link $n0 $n2 10Mb 10ms DropTail
 $ns duplex-link $n1 $n2 10Mb 10ms DropTail
-$ns duplex-link $n2 $n3 100Mb 1ms DropTail
+$ns duplex-link $n2 $n3 10Mb 1ms DropTail
 
 #Attach UDP agents
 set tcp0 [new Agent/TCP]
@@ -54,10 +54,10 @@ $tcp0 set class_ 1
 $udp set class_ 2
 
 #Assign some properties
-$ftp0 set packetSize_ 2
+$ftp0 set packetSize_ 90
 $ftp0 set interval_ 0.01
 
-$cbr set packetSize_ 3
+$cbr set packetSize_ 93
 $cbr set interval _ 0.1
 
 #connect 
