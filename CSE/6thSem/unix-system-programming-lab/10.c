@@ -5,27 +5,15 @@
 #define INTERVAL 5
 void callme(int sig_no)
 {
-alarm(INTERVAL);
-printf("Hello!!");
+	alarm(INTERVAL);
+	printf("Hello!!\n");
 }
 int main()
 {
-struct sigaction action;
-sigemptyset(&action.sa_mask);
-action.sa_handler=(void(*)(int))callme;
-action.sa_flags=SA_RESTART;
-if(sigaction(SIGALRM,&action,0)==-1)
-{
-perror("sigaction\n");
-return 1;
-}
-/*if(alarm(INTERVAL)==-1)
-{
-perror("alarm\n");
-}
-else
-{*/
-sleep(10);
-//}
-return 0;
+	struct sigaction action;
+	action.sa_handler=(void(*)(int))callme;
+	sigaction(SIGALRM,&action,0);
+	alarm(2);
+	sleep(5);
+	return 0;
 }
