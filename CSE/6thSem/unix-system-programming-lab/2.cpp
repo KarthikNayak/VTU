@@ -6,29 +6,29 @@ using namespace std;
 int main()
 {
 	#ifdef _POSIX_JOB_CONTROL
-		cout<<"system supports job control:"<<_POSIX_JOB_CONTROL<<endl;
+		cout<<"system supports POSIX job control:"<<_POSIX_JOB_CONTROL<<endl;
 	#else
-		cout<<"sys does not support"<<endl;
+		cout<<"system  does not support POSIX job control"<<endl;
 	#endif
 	#ifdef _POSIX_SAVED_IDS
-		cout<<"sys suppostrs saved set UID and GID:"<<_POSIX_SAVED_IDS<<endl;
+		cout<<"system supports saved set UID and GID:"<<_POSIX_SAVED_IDS<<endl;
 	#else
-		cout<<"sys does not support"<<endl;
+		cout<<"system does not support saved set GID and UID"<<endl;
 	#endif
 	#ifdef _POSIX_CHOWN_RESTRICTED
 		cout<<"chown restricted option:"<<_POSIX_CHOWN_RESTRICTED<<endl;
 	#else
-		cout<<"sys does not support"<<endl;
+		cout<<"Chown Restricted not defined"<<endl;
 	#endif
 	#ifdef _POSIX_NO_TRUNC
 		cout<<"Truncation option:"<<_POSIX_NO_TRUNC<<endl;
 	#else
-		cout<<"sys does not support"<<endl;
+		cout<<"No Trunc not defined"<<endl;
 	#endif
 	#ifdef _POSIX_VDISABLE
 		cout<<"disable char for terminal files"<<_POSIX_VDISABLE<<endl;
 	#else
-		cout<<"sys does not support"<<endl;
+		cout<<"char for terminal device files will not be diasbled"<<endl;
 	#endif
 	return 0;
 }
