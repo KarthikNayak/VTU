@@ -1,3 +1,5 @@
+### Thanks to Arpith from PESIT https://github.com/arpith20 ###
+
 if {$argc != 1} {
 	error "Command: ns <ScriptName.tcl> <Number_of_Nodes>"
 	exit 0
