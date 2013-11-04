@@ -21,9 +21,15 @@ $n2 label "Intermediate"
 $n3 label "dest"
 
 #Create links
-$ns duplex-link $n0 $n2 10Mb 10ms DropTail
-$ns duplex-link $n1 $n2 10Mb 10ms DropTail
-$ns duplex-link $n2 $n3 10Mb 1ms DropTail
+$ns duplex-link $n0 $n2 1Mb 10ms DropTail
+$ns  queue-limit $n0 $n2 5
+
+$ns duplex-link $n1 $n2 1Mb 10ms DropTail
+$ns  queue-limit $n1 $n2 5
+
+$ns duplex-link $n2 $n3 1Mb 1ms DropTail
+$ns  queue-limit $n2 $n3 5
+
 
 #Attach TCP agents
 set tcp0 [new Agent/TCP]
