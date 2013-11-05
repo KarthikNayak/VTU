@@ -1,0 +1,271 @@
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (91.3ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (155.9ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (2.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateBooks (20131029181837)
+  [1m[35m (92.0ms)[0m  CREATE TABLE `books` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `access_no` int(11), `title` varchar(255), `author` varchar(255), `edition` int(11), `publisher` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (32.8ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131029181837')[0m
+  [1m[35m (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2013-10-29 23:53:49 +0530
+Served asset /rails.png - 304 Not Modified (4ms)
+
+
+Started GET "/books/index" for 127.0.0.1 at 2013-10-29 23:53:53 +0530
+Processing by BooksController#index as HTML
+  Rendered books/index.html.erb within layouts/application (22.8ms)
+Compiled books.css  (5ms)  (pid 24370)
+Compiled application.css  (10ms)  (pid 24370)
+Compiled jquery.js  (1ms)  (pid 24370)
+Compiled jquery_ujs.js  (0ms)  (pid 24370)
+Compiled books.js  (122ms)  (pid 24370)
+Compiled application.js  (171ms)  (pid 24370)
+Completed 200 OK in 269ms (Views: 267.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/books.css?body=1" for 127.0.0.1 at 2013-10-29 23:53:53 +0530
+Served asset /books.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/books.js?body=1" for 127.0.0.1 at 2013-10-29 23:53:53 +0530
+Served asset /books.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-29 23:53:53 +0530
+Served asset /jquery.js - 200 OK (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-29 23:53:53 +0530
+Served asset /jquery_ujs.js - 200 OK (2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-29 23:53:53 +0530
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-29 23:53:53 +0530
+Served asset /application.js - 304 Not Modified (7ms)
+
+
+Started POST "/books/add" for 127.0.0.1 at 2013-10-29 23:54:15 +0530
+Processing by BooksController#add as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YRJmtpTXZ4+vRPztkLbAD3c3b5TIrLFAarnR7faf/6k=", "b_access_no"=>"100", "b_title"=>"Rails", "b_author"=>"A", "b_edition"=>"1", "b_publisher"=>"P1", "commit"=>"Add Book"}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `books` (`access_no`, `author`, `created_at`, `edition`, `publisher`, `title`, `updated_at`) VALUES (100, 'A', '2013-10-29 18:24:15', 1, 'P1', 'Rails', '2013-10-29 18:24:15')
+  [1m[36m (59.4ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/books/index
+Completed 302 Found in 135ms (ActiveRecord: 60.7ms)
+
+
+Started GET "/books/index" for 127.0.0.1 at 2013-10-29 23:54:15 +0530
+Processing by BooksController#index as HTML
+  Rendered books/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 12ms (Views: 12.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:15 +0530
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/books.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:15 +0530
+Served asset /books.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:15 +0530
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/books.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:15 +0530
+Served asset /books.css - 304 Not Modified (0ms)
+
+
+Started POST "/books/add" for 127.0.0.1 at 2013-10-29 23:54:28 +0530
+Processing by BooksController#add as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YRJmtpTXZ4+vRPztkLbAD3c3b5TIrLFAarnR7faf/6k=", "b_access_no"=>"101", "b_title"=>"Ruby", "b_author"=>"B", "b_edition"=>"7", "b_publisher"=>"P2", "commit"=>"Add Book"}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `books` (`access_no`, `author`, `created_at`, `edition`, `publisher`, `title`, `updated_at`) VALUES (101, 'B', '2013-10-29 18:24:28', 7, 'P2', 'Ruby', '2013-10-29 18:24:28')[0m
+  [1m[35m (80.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/books/index
+Completed 302 Found in 84ms (ActiveRecord: 80.6ms)
+
+
+Started GET "/books/index" for 127.0.0.1 at 2013-10-29 23:54:28 +0530
+Processing by BooksController#index as HTML
+  Rendered books/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 7ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:28 +0530
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/books.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:28 +0530
+Served asset /books.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:28 +0530
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/books.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:28 +0530
+Served asset /books.js - 304 Not Modified (0ms)
+
+
+Started POST "/books/search" for 127.0.0.1 at 2013-10-29 23:54:30 +0530
+Processing by BooksController#search as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YRJmtpTXZ4+vRPztkLbAD3c3b5TIrLFAarnR7faf/6k=", "bs_title"=>"Ruby", "commit"=>"Search"}
+  [1m[36mBook Load (0.3ms)[0m  [1mSELECT `books`.* FROM `books` WHERE `books`.`title` = 'Ruby' LIMIT 1[0m
+  Rendered books/search.html.erb within layouts/application (30.1ms)
+Completed 200 OK in 38ms (Views: 37.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:31 +0530
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/books.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:31 +0530
+Served asset /books.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/books.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:31 +0530
+Served asset /books.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:31 +0530
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/books/index" for 127.0.0.1 at 2013-10-29 23:54:34 +0530
+Processing by BooksController#index as HTML
+  Rendered books/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 8ms (Views: 7.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:34 +0530
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/books.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:34 +0530
+Served asset /books.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:34 +0530
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/books.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:34 +0530
+Served asset /books.js - 304 Not Modified (0ms)
+
+
+Started POST "/books/search" for 127.0.0.1 at 2013-10-29 23:54:36 +0530
+Processing by BooksController#search as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YRJmtpTXZ4+vRPztkLbAD3c3b5TIrLFAarnR7faf/6k=", "bs_title"=>"Rails", "commit"=>"Search"}
+  [1m[35mBook Load (0.5ms)[0m  SELECT `books`.* FROM `books` WHERE `books`.`title` = 'Rails' LIMIT 1
+  Rendered books/search.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 12ms (Views: 11.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/books.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:36 +0530
+Served asset /books.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/books.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:36 +0530
+Served asset /books.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-29 23:54:36 +0530
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-29 23:54:36 +0530
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started POST "/books/search" for 127.0.0.1 at 2013-10-29 23:54:41 +0530
+Processing by BooksController#search as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YRJmtpTXZ4+vRPztkLbAD3c3b5TIrLFAarnR7faf/6k=", "bs_title"=>"No", "commit"=>"Search"}
+  [1m[36mBook Load (0.3ms)[0m  [1mSELECT `books`.* FROM `books` WHERE `books`.`title` = 'No' LIMIT 1[0m
+  Rendered books/search.html.erb within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 5ms
+
+ActionView::Template::Error (undefined method `access_no' for nil:NilClass):
+    13: 		<th>Publisher</th>
+    14: 	</tr>
+    15: 	<tr>
+    16: 		<td> <%=  @t.access_no %> </td>
+    17: 		<td> <%= @t.title %> </td>
+    18: 		<td> <%= @t.author %> </td>
+    19: 		<td> <%= @t.edition %> </td>
+  app/views/books/search.html.erb:16:in `_app_views_books_search_html_erb___3269100133565455390_38348660'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.2ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2013-10-30 00:47:18 +0530
+Served asset /rails.png - 304 Not Modified (2ms)
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2013-10-30 00:47:22 +0530
+Served asset /rails.png - 304 Not Modified (0ms)
+
+
+Started GET "/books/index" for 127.0.0.1 at 2013-10-30 00:47:27 +0530
+Processing by BooksController#index as HTML
+  Rendered books/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 40ms (Views: 39.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/books.css?body=1" for 127.0.0.1 at 2013-10-30 00:47:27 +0530
+Served asset /books.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-30 00:47:27 +0530
+Served asset /application.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-30 00:47:27 +0530
+Served asset /jquery.js - 200 OK (6ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-30 00:47:27 +0530
+Served asset /jquery_ujs.js - 200 OK (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-30 00:47:27 +0530
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/books.js?body=1" for 127.0.0.1 at 2013-10-30 00:47:27 +0530
+Served asset /books.js - 304 Not Modified (1ms)
+
+
+Started POST "/books/search" for 127.0.0.1 at 2013-10-30 00:47:31 +0530
+Processing by BooksController#search as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"O3CyOUgCKqEw6H7FFAR9rv6O5tLVKXcDLeDV9bb3Urg=", "bs_title"=>"Rails", "commit"=>"Search"}
+  [1m[36mBook Load (0.2ms)[0m  [1mSELECT `books`.* FROM `books` WHERE `books`.`title` = 'Rails' LIMIT 1[0m
+  Rendered books/search.html.erb within layouts/application (81.9ms)
+Completed 200 OK in 93ms (Views: 89.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/books.js?body=1" for 127.0.0.1 at 2013-10-30 00:47:31 +0530
+Served asset /books.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-30 00:47:31 +0530
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/books.css?body=1" for 127.0.0.1 at 2013-10-30 00:47:31 +0530
+Served asset /books.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-30 00:47:31 +0530
+Served asset /application.js - 304 Not Modified (1ms)

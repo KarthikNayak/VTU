@@ -1,19 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<iostream>
 #include<unistd.h>
 #include<fcntl.h>
 #include<errno.h>
-using namespace std;
 int main(int argc,char *argv[])
 {
 	int fd;
-	char *file=argv[1];
 	char buffer[255];
 	struct flock fvar;
 	if(argc==1)
 	{
-		cout<<"usage:./a.out filename\n";
+		printf("usage:./a.out filename\n");
 		return -1;
 	}
 	if((fd=open(argv[1],O_RDWR))==-1)
@@ -22,18 +19,19 @@ int main(int argc,char *argv[])
 		exit(1);
 	}
 	fvar.l_type=F_WRLCK;
-	fvar.l_whence=SEEK_SET;
-	fvar.l_start=50;
-	fvar.l_len=150;
-	while(fcntl(fd,F_SETLK,&fvar)==-1)
-	{
-		while((fcntl(fd,F_GETLK,&fvar)!=-1)&&fvar.l_type!=F_UNLCK)
-		{
-			cout<<*argv <<"locked by process "<<fvar.l_pid<<"from "<<fvar.l_start<<"for "<<fvar.l_len<<"bytes"<<" Lock set is "<<(fvar.l_type==F_WRLCK?'w':'r')<<endl;
-		}
+	fvar.l_whence=SEEK_END;
+	fvar.l_start=SEEK_END-100;
+	fvar.l_len=100;
+	printf("press enter to set lock\n");
+	getchar();
+	printf("trying to get lock..\n");
+	if((fcntl(fd,F_SETLK,&fvar))==-1)
+	{     fcntl(fd,F_GETLK,&fvar);
+	      printf("\nFile already locaked by process (pid):\t%d\n",fvar.l_pid);	
+	      return -1;	
 	}
-	printf("file locked\n");
-	if((lseek(fd,50,SEEK_SET))==-1)
+	printf("locked\n");
+	if((lseek(fd,SEEK_END-50,SEEK_END))==-1)
 	{
 		perror("lseek");
 		exit(1);
@@ -43,9 +41,9 @@ int main(int argc,char *argv[])
 		perror("read");
 		exit(1);
 	}
-	printf("data read..\n");
+	printf("data read from file..\n");
 	puts(buffer);
-	printf("enter to release lock\n");
+	printf("press enter to release lock\n");
 	getchar();
 	fvar.l_type = F_UNLCK;
 	fvar.l_whence = SEEK_SET;
@@ -56,7 +54,7 @@ int main(int argc,char *argv[])
 		perror("fcntl");
 		exit(0);
 	}
-	printf("Unlocked file\n");
+	printf("Unlocked\n");
 	close(fd);
 	return 0;
 }
