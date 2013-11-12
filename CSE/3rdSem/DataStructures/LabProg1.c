@@ -185,7 +185,7 @@ void main()
 	MALLOC(head2, 1, struct node);
 	MALLOC(head3, 1, struct node);
 	// NODEs head1, head2 and head3 are dynamically allocated memory using the macro MALLOC.
-	/* "->" is used as an alternative to (*ptr).member hence ptr->member
+	// "->" is used as an alternative to (*ptr).member hence ptr->member
 	head1->link = head1; 
 	head2->link = head2;
 	head3->link = head3;
