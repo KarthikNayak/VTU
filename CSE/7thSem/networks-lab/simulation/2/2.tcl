@@ -74,6 +74,7 @@ proc finish {} {
 	global ns nf
 	$ns flush-trace
 	exec nam 2.nam &
+	exec bash 2.sh &
 	close $nf
 	exit 0
 }

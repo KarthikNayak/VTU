@@ -14,6 +14,7 @@ proc finish {} {
 	$ns flush-trace
 	#Execute nam file
 	exec nam 1.nam &
+	exec bash 1.sh &
 	#Close nam file
 	close $nf
 	exit 0

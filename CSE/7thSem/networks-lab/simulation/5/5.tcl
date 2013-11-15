@@ -61,7 +61,7 @@ $ns duplex-link-op $n(2) $n(3) orient right
 
 #Setup queue between n(2) and n(3) and monitor the queue
 $ns queue-limit $n(2) $n(3) 20
-$ns duplex-link-op $n(2) $n(3) queuePos 0.5
+#$ns duplex-link-op $n(2) $n(3) queuePos 0.5
 
 #Set error model on link n(2) to n(3)
 set loss_module [new ErrorModel]

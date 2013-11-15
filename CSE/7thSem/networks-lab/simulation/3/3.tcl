@@ -11,6 +11,7 @@ proc finish {} {
 	close $f
 	close $nf
 	exec nam out.nam &
+	exec bash 3.sh &
 	exit 0
 }
 
