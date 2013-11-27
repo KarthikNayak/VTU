@@ -1,4 +1,4 @@
-#include<iostream>
+#include<iostream.h>
 #include<conio.h>
 #include<process.h>
 class date
