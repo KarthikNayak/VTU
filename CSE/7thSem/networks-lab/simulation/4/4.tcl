@@ -1,109 +1,140 @@
-#Create Simulator
+# This script is created by NSG2 beta1
+# <http://wushoupong.googlepages.com/nsg>
+
+#===================================
+#     Simulation parameters setup
+#===================================
+set val(stop)   10.0                         ;# time of simulation end
+
+#===================================
+#        Initialization        
+#===================================
+#Create a ns simulator
 set ns [new Simulator]
 
-#Use colors to differentiate the traffic
-$ns color 1 Blue
-$ns color 2 Red
+#add manually
+$ns color 1 "red"
+$ns color 2 "blue"
+#end
 
-#Open trace and NAM trace file
-set ntrace [open prog5.tr w]
-$ns trace-all $ntrace
-set namfile [open prog5.nam w]
+#Open the NS trace file
+set tracefile [open 4.tr w]
+$ns trace-all $tracefile
+
+#Open the NAM trace file
+set namfile [open 4.nam w]
 $ns namtrace-all $namfile
 
-#Finish Procedure
-proc finish {} {
-global ns ntrace namfile
-
-#Dump all trace data and close the files
-$ns flush-trace
-close $ntrace
-close $namfile
-
-#Execute the nam animation file
-exec nam prog5.nam &
-
-#Calculate the throughput = (number of packets received/time taken for simulation)
-set TcpSize [exec grep "^r" prog5.tr | grep "tcp" | tail -n 1 | cut -d " " -f 6]
-set numTcp [exec grep "^r" prog5.tr | grep -c "tcp"]
-set tcpTime 123.0
-set UdpSize [exec grep "^r" prog5.tr | grep "cbr" | tail -n 1 | cut -d " " -f 6]
-set numUdp [exec grep "^r" prog5.tr | grep -c "cbr"]
-set udpTime 124.4
-puts "The throughput of FTP is"
-puts "[expr ($numTcp*$TcpSize)/$tcpTime] bytes per second"
-puts "The throughput of CBR is"
-puts "[expr ($numUdp*$UdpSize)/$udpTime] bytes per second" 
-exit 0
-}
-
+#===================================
+#        Nodes Definition        
+#===================================
 #Create 6 nodes
-for {set i 0} {$i< 6} {incr i} {
-set n($i) [$ns node]
-}
+set n0 [$ns node]
+set n1 [$ns node]
+set n2 [$ns node]
+set n3 [$ns node]
+set n4 [$ns node]
+set n5 [$ns node]
 
-#Create duplex links between the nodes
-$ns duplex-link $n(0) $n(2) 2Mb 10ms DropTail
-$ns duplex-link $n(1) $n(2) 2Mb 10ms DropTail
-$ns duplex-link $n(2) $n(3) 0.3Mb 100ms DropTail
-$ns duplex-link $n(3) $n(2) 0.3Mb 100ms DropTail
+#===================================
+#        Links Definition        
+#===================================
+#Createlinks between nodes
+$ns duplex-link $n0 $n2 10.0Mb 10ms DropTail
+$ns queue-limit $n0 $n2 5
+$ns duplex-link $n1 $n2 10.0Mb 10ms DropTail
+$ns queue-limit $n1 $n2 5
+$ns duplex-link $n2 $n3 .3Mb 10ms DropTail
+$ns queue-limit $n2 $n3 5
 
-#Node n(3), n(4) and n(5) are considered in a LAN
-set lan [$ns newLan "$n(3) $n(4) $n(5)" 0.5Mb 40ms LL Queue/DropTail MAC/802_3 Channel]
+#Give node position (for NAM)
+$ns duplex-link-op $n0 $n2 orient right-down
+$ns duplex-link-op $n1 $n2 orient right-up
+$ns duplex-link-op $n2 $n3 orient right
+#add manually
+$ns duplex-link-op $n2 $n3 queuePos 0.5
 
-#Orientation to the nodes
-$ns duplex-link-op $n(0) $n(2) orient right-down
-$ns duplex-link-op $n(1) $n(2) orient right-up
-$ns simplex-link-op $n(2) $n(3) orient right
+set lan [$ns newLan "$n3 $n4 $n5" 0.5Mb 40ms LL Queue/DropTail MAC/802_3 Channel]
 
-#Setup queue between n(2) and n(3) and monitor the queue
-$ns queue-limit $n(2) $n(3) 20
-$ns simplex-link-op $n(2) $n(3) queuePos 0.5
-
-#Set error model on link n(2) and n(3) and insert the error model
 set loss_module [new ErrorModel]
 $loss_module ranvar [new RandomVariable/Uniform]
 $loss_module drop-target [new Agent/Null]
-$ns lossmodel $loss_module $n(2) $n(3)
+$ns lossmodel $loss_module $n2 $n3
+#end
 
-#Setup TCP Connection between n(0) and n(4)
-set tcp0 [new Agent/TCP/Newreno]
-$tcp0 set fid_ 1
-$tcp0 set window_ 8000
-$tcp0 set packetSize_ 552
-$ns attach-agent $n(0) $tcp0
-set sink0 [new Agent/TCPSink/DelAck]
-$ns attach-agent $n(4) $sink0
-$ns connect $tcp0 $sink0
+#===================================
+#        Agents Definition        
+#===================================
+#Setup a TCP connection
+set tcp0 [new Agent/TCP]
+$ns attach-agent $n0 $tcp0
+set sink1 [new Agent/TCPSink]
+$ns attach-agent $n4 $sink1
+$ns connect $tcp0 $sink1
+$tcp0 set packetSize_ 1500
 
-#Apply FTP Application over TCP
+#Setup a UDP connection
+set udp2 [new Agent/UDP]
+$ns attach-agent $n1 $udp2
+set null3 [new Agent/Null]
+$ns attach-agent $n5 $null3
+$ns connect $udp2 $null3
+$udp2 set packetSize_ 1500
+
+
+#===================================
+#        Applications Definition        
+#===================================
+#Setup a FTP Application over TCP connection
 set ftp0 [new Application/FTP]
-$ftp0 set type_ FTP
 $ftp0 attach-agent $tcp0
+$ns at 0.1 "$ftp0 start"
+$ns at 9.8 "$ftp0 stop"
 
-#Setup UDP Connection between n(1) and n(5)
-set udp0 [new Agent/UDP]
-$udp0 set fid_ 2
-$ns attach-agent $n(1) $udp0
-set null0 [new Agent/Null]
-$ns attach-agent $n(5) $null0
-$ns connect $udp0 $null0
+#Setup a CBR Application over UDP connection
+set cbr1 [new Application/Traffic/CBR]
+$cbr1 attach-agent $udp2
+$cbr1 set packetSize_ 1000
+$cbr1 set rate_ 0.1Mb
+$cbr1 set random_ null
+$ns at 0.5 "$cbr1 start"
+$ns at 9.9 "$cbr1 stop"
 
-#Apply CBR Traffic over UDP
-set cbr0 [new Application/Traffic/CBR]
-$cbr0 set type_ CBR
-$cbr0 set packetSize_ 1000
-$cbr0 set rate_ 0.1Mb
-$cbr0 set random_ false
-$cbr0 attach-agent $udp0
+#add manually
+$tcp0 set class_ 1
+$udp2 set class_ 2
+#end
 
-#Schedule events
-$ns at 0.1 "$cbr0 start"
-$ns at 1.0 "$ftp0 start"
-$ns at 124.0 "$ftp0 stop"
-$ns at 124.5 "$cbr0 stop"
-$ns at 125.0 "finish"
-
-#Run Simulation
+#===================================
+#        Termination        
+#===================================
+#Define a 'finish' procedure
+proc finish {} {
+    global ns tracefile namfile
+    $ns flush-trace
+    close $tracefile
+    close $namfile
+    #add manually
+    set TcpSize 1500
+#[exec grep "^r" 4.tr | grep -c "tcp" ]
+    set numTcp [exec grep "^r" 4.tr | grep -c "tcp"]
+    set tcpTime 9.7
+    set UdpSize 1000
+    set numUdp [exec grep "^r" 4.tr | grep -c "cbr" ]
+    set udpTime 9.4
+    puts "The throughput of FTP is"
+    puts "[expr ($numTcp*$TcpSize)/$tcpTime] bytes per second"
+    puts "The throughput of CBR is"
+    puts "[expr ($numUdp*$UdpSize)/$udpTime] bytes per second" 
+    #end
+    exec nam 4.nam &
+    exit 0
+}
+$ns at $val(stop) "$ns nam-end-wireless $val(stop)"
+$ns at $val(stop) "finish"
+$ns at $val(stop) "puts \"done\" ; $ns halt"
 $ns run
 
+#output: To check throughput by varying the bandwidth between nodes n2 and n3
+# 1st instance: $ns duplex-link $n2 $n3 0.3Mb 10ms DropTail ( at line 47)
+# 2nd instance: $ns duplex-link $n2 $n3 3Kb 10ms DropTail
