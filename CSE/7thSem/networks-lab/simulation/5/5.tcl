@@ -1,37 +1,34 @@
-#Create Simulator
+# This script is created by NSG2 beta1
+# <http://wushoupong.googlepages.com/nsg>
+
+#===================================
+#     Simulation parameters setup
+#===================================
+set val(stop)   10.0                         ;# time of simulation end
+
+#===================================
+#        Initialization        
+#===================================
+#Create a ns simulator
 set ns [new Simulator]
 
-#Use colors to differentiate the traffics
-$ns color 1 Blue
-$ns color 2 Red
+#add manually
+$ns color 1 "red"
+$ns color 2 "blue"
+#end
 
-#Open trace and NAM trace file
-set ntrace [open prog7.tr w]
-$ns trace-all $ntrace
-set namfile [open prog7.nam w]
+#Open the NS trace file
+set tracefile [open 5.tr w]
+$ns trace-all $tracefile
+
+#Open the NAM trace file
+set namfile [open 5.nam w]
 $ns namtrace-all $namfile
 
-#Use some flat file to create congestion graph windows
-set winFile0 [open WinFile0 w]
-set winFile1 [open WinFile1 w]
+#add manually
+set wf0 [open WinFile0 w]
+set wf1 [open WinFile1 w]
 
-#Finish Procedure
-proc Finish {} {
-#Dump all trace data and Close the files
-global ns ntrace namfile
-$ns flush-trace
-close $ntrace
-close $namfile
-
-#Execute the NAM animation file
-exec nam prog7.nam &
-
-#Plot the Congestion Window graph using xgraph
-exec xgraph WinFile0 WinFile1 &
-exit 0
-}
-
-#Plot Window Procedure
 proc PlotWindow {tcpSource file} {
 global ns
 set time 0.1
@@ -40,75 +37,106 @@ set cwnd [$tcpSource set cwnd_]
 puts $file "$now $cwnd"
 $ns at [expr $now+$time] "PlotWindow $tcpSource $file"
 }
+#end
 
+#===================================
+#        Nodes Definition        
+#===================================
 #Create 6 nodes
-for {set i 0} {$i<6} {incr i} {
-set n($i) [$ns node]
-}
+set n0 [$ns node]
+set n1 [$ns node]
+set n2 [$ns node]
+set n3 [$ns node]
+set n4 [$ns node]
+set n5 [$ns node]
 
-#Create duplex links between the nodes
-$ns duplex-link $n(0) $n(2) 2Mb 10ms DropTail
-$ns duplex-link $n(1) $n(2) 2Mb 10ms DropTail
-$ns duplex-link $n(2) $n(3) 0.6Mb 100ms DropTail
+#===================================
+#        Links Definition        
+#===================================
+#Createlinks between nodes
+$ns duplex-link $n0 $n2 2.0Mb 10ms DropTail
+$ns queue-limit $n0 $n2 5
+$ns duplex-link $n1 $n2 2.0Mb 10ms DropTail
+$ns queue-limit $n1 $n2 5
+$ns duplex-link $n2 $n3 0.3Mb 10ms DropTail
+$ns queue-limit $n2 $n3 3
 
-#Nodes n(3) , n(4) and n(5) are considered in a LAN
-set lan [$ns newLan "$n(3) $n(4) $n(5)" 0.5Mb 40ms LL Queue/DropTail MAC/802_3 Channel]
+#Give node position (for NAM)
+$ns duplex-link-op $n0 $n2 orient right-down
+$ns duplex-link-op $n1 $n2 orient right-up
+$ns duplex-link-op $n2 $n3 orient right
 
-#Orientation to the nodes
-$ns duplex-link-op $n(0) $n(2) orient right-down
-$ns duplex-link-op $n(1) $n(2) orient right-up
-$ns duplex-link-op $n(2) $n(3) orient right
+#add manually
+$ns duplex-link-op $n2 $n3 queuePos 0.5
 
-#Setup queue between n(2) and n(3) and monitor the queue
-$ns queue-limit $n(2) $n(3) 20
-#$ns duplex-link-op $n(2) $n(3) queuePos 0.5
+set lan [$ns newLan "$n3 $n4 $n5" 0.5Mb 40ms LL Queue/DropTail MAC/802_3 Channel]
 
-#Set error model on link n(2) to n(3)
 set loss_module [new ErrorModel]
 $loss_module ranvar [new RandomVariable/Uniform]
 $loss_module drop-target [new Agent/Null]
-$ns lossmodel $loss_module $n(2) $n(3)
+$ns lossmodel $loss_module $n2 $n3
+#end
 
-#Set up the TCP connection between n(0) and n(4)
-set tcp0 [new Agent/TCP/Newreno]
-$tcp0 set fid_ 1
-$tcp0 set window_ 8000
-$tcp0 set packetSize_ 552
-$ns attach-agent $n(0) $tcp0
-set sink0 [new Agent/TCPSink/DelAck]
-$ns attach-agent $n(4) $sink0
-$ns connect $tcp0 $sink0
+#===================================
+#        Agents Definition        
+#===================================
+#Setup a TCP connection
+set tcp0 [new Agent/TCP]
+$ns attach-agent $n0 $tcp0
+set sink2 [new Agent/TCPSink]
+$ns attach-agent $n4 $sink2
+$ns connect $tcp0 $sink2
+$tcp0 set packetSize_ 1500
+
+#Setup a TCP connection
+set tcp1 [new Agent/TCP]
+$ns attach-agent $n1 $tcp1
+set sink3 [new Agent/TCPSink]
+$ns attach-agent $n5 $sink3
+$ns connect $tcp1 $sink3
+$tcp1 set packetSize_ 1500
 
 
-
-#Apply FTP Application over TCP
+#===================================
+#        Applications Definition        
+#===================================
+#Setup a FTP Application over TCP connection
 set ftp0 [new Application/FTP]
 $ftp0 attach-agent $tcp0
-$ftp0 set type_ FTP
+$ns at 0.1 "$ftp0 start"
+$ns at 9.8 "$ftp0 stop"
 
-#Set up another TCP connection between n(5) and n(1)
-set tcp1 [new Agent/TCP/Newreno]
-$tcp1 set fid_ 2
-$tcp1 set window_ 8000
-$tcp1 set packetSize_ 552
-$ns attach-agent $n(5) $tcp1
-set sink1 [new Agent/TCPSink/DelAck]
-$ns attach-agent $n(1) $sink1
-$ns connect $tcp1 $sink1
-
-#Apply FTP application over TCP
+#Setup a FTP Application over TCP connection
 set ftp1 [new Application/FTP]
 $ftp1 attach-agent $tcp1
-$ftp1 set type_ FTP
+$ns at 0.2 "$ftp1 start"
+$ns at 9.9 "$ftp1 stop"
 
-#Schedule Events
-$ns at 0.1 "$ftp0 start"
-$ns at 0.1 "PlotWindow $tcp0 $winFile0"
-$ns at 0.5 "$ftp1 start"
-$ns at 0.5 "PlotWindow $tcp1 $winFile1"
-$ns at 25.0 "$ftp0 stop"
-$ns at 25.1 "$ftp1 stop"
-$ns at 25.2 "Finish"
 
-#Run the simulation
+#add manually
+$ns at 0.1 "PlotWindow $tcp0 $wf0"
+$ns at 0.5 "PlotWindow $tcp1 $wf1"
+
+$tcp0 set class_ 1
+$tcp1 set class_ 2
+#end
+
+#===================================
+#        Termination        
+#===================================
+#Define a 'finish' procedure
+proc finish {} {
+    global ns tracefile namfile
+    $ns flush-trace
+    close $tracefile
+    close $namfile
+    exec nam 5.nam &
+    exec xgraph WinFile0 WinFile1 &
+    exit 0
+}
+$ns at $val(stop) "$ns nam-end-wireless $val(stop)"
+$ns at $val(stop) "finish"
+$ns at $val(stop) "puts \"done\" ; $ns halt"
 $ns run
+
+#output: Explain the graph
