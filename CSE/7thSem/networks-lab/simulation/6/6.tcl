@@ -15,6 +15,7 @@ set val(ifqlen)     50
 set val(netif)      Phy/WirelessPhy 
 set val(mac)        Mac/802_11 
 set val(rp)         AODV
+##AODV is Ad hoc on demand Distance Vector routing
 set val(nn)         [lindex $argv 0]
 set opt(x)  	    750
 set opt(y)          750
