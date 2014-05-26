@@ -5,7 +5,7 @@ void prims(int a[10][10], int n)
 {
 	int elec[9], u, v, i, j, ne = 0, cost = 0, mincost = 999;
 	elec[1] = 1;
-	while(ne != n -1)
+	while(ne != n - 1)
 	{
 		mincost = 999;
 		for (i = 1; i <= n; i++)
