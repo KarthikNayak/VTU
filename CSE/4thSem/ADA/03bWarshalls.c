@@ -1,5 +1,10 @@
+/*
+ * Compute the transitive closure of a given directed graph
+ * using Warshall's algorithm.
+ */
+
 #include <stdio.h>
-#include <math.h>nnnn
+#include <math.h>
 
 int max(int a, int b)
 {
