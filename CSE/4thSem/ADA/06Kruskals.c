@@ -1,15 +1,24 @@
+/*
+ * Find Minimum Cost Spanning Tree of a given undirected graph 
+ * using Kruskal's algorithm.
+ */
+
 #include<stdio.h>
 #include<stdlib.h>
+
 int i, j, k, a, b, u, v, n, ne = 1;
 int min, mincost = 0, cost[9][9], parent[9];
+
 int find(int);
+
 int uni(int, int);
+
 int main()
 {
-	printf("\n\n\tImplementation of Kruskal's algorithm\n\n");
-	printf("\nEnter the no. of vertices\n");
+	printf("Implementation of Kruskal's algorithm\n");
+	printf("Enter the no. of vertices\n");
 	scanf("%d", &n);
-	printf("\nEnter the cost adjacency matrix\n");
+	printf("Enter the cost adjacency matrix\n");
 	for(i = 1; i <= n; i++)
 	{
 		for(j = 1; j <= n; j++)
@@ -19,7 +28,7 @@ int main()
 				cost[i][j] = 999;
 		}
 	}
-	printf("\nThe edges of Minimum Cost Spanning Tree are\n\n");
+	printf("The edges of Minimum Cost Spanning Tree are\n\n");
 	while(ne<n)
 	{
 		for(i = 1, min = 999;i <= n; i++)
@@ -38,12 +47,12 @@ int main()
 		v = find(v);
 		if(uni(u, v))
 		{
-			printf("\n%d edge (%d, %d)  = %d\n", ne++, a, b, min);
+			printf("%d edge (%d, %d)  = %d\n", ne++, a, b, min);
 			mincost += min;
 		}
 		cost[a][b] = cost[b][a] = 999;
 	}
-	printf("\n\tMinimum cost  =  %d\n", mincost);
+	printf("Minimum cost  =  %d\n", mincost);
 }
 
 int find(int i)
