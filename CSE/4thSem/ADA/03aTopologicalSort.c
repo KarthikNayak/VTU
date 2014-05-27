@@ -9,7 +9,7 @@
 int main(int argc, char *argv[])
 {
 	int no, i, j;
-	int a[MAX][MAX], indeg[MAX] = {0}, visited[MAX] = {0};
+	int a[MAX][MAX], indeg[MAX] = {0}, visited[MAX] = {0}, count = 0;
 	
 	printf ("Enter The No of Vertices\n");
 	scanf("%d", &no);
