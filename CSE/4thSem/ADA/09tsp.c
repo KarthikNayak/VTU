@@ -12,13 +12,13 @@ int a[10][10], visited[10], no, cost, sum, vs[10];
 
 void tsp(int city)
 {
-	int i, ncity;
+	int ncity;
 	visited[city] = 1;
 	printf("%d ->", city);
 	ncity = least(city);
 	if(ncity == 999)
 	{
-		cost += a[city][i];
+		cost += a[city][1];
 		printf("1\n");
 		return;
 	}
