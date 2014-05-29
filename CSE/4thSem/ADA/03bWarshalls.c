@@ -6,13 +6,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int max(int a, int b)
-{
-if(a > b)
-	return(a); 
-else
-	return(b); 
-}
+#define max(a, b) (a > b ? a : b)
 
 void warshal(int p[10][10], int n)
 {
@@ -25,17 +19,13 @@ void warshal(int p[10][10], int n)
 
 void main()
 {
-	int p[10][10] = {0}, n, e, u, v, i, j; 
-	printf("\n Enter the number of vertices:"); 
-	scanf("%d", &n); 
-	printf("\n Enter the number of edges:"); 
-	scanf("%d", &e); 
-	for(i = 1; i <= e; i++)
-	{
-		printf("\n Enter the end vertices of edge %d:", i); 
-		scanf("%d%d", &u, &v); 
-		p[u][v] = 1; 
-	}
+	int p[10][10] = {0}, n, i, j; 
+	printf("Enter the size of matrix\n");
+	scanf("%d", &n);
+	printf ("Enter the Adjacency matrix\n");
+	for(i = 1; i <= n; i++)
+		for(j = 1; j <= n; j++)
+			scanf("%d", p[i][j]);
 	warshal(p, n); 
 	printf("\n Transitive closure: \n"); 
 	for(i = 1; i <= n; i++)

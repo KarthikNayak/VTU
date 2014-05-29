@@ -29,11 +29,11 @@ int main()
 		}
 	}
 	printf("The edges of Minimum Cost Spanning Tree are\n\n");
-	while(ne<n)
+	while(ne < n)
 	{
 		for(i = 1, min = 999;i <= n; i++)
 		{
-			for(j = 1;j <= n; j++)
+			for(j = 1; j <= n; j++)
 			{
 				if(cost[i][j]<min)
 				{

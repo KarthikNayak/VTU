@@ -34,7 +34,7 @@ void prims(int a[10][10], int n)
 			cost = cost + mincost;
 			ne ++;
 		}
-		a[u][v] = 999 + a[u][v];
+		a[u][v] += 999;
 	}
 	printf("Mincost : %d\n",cost);
 }

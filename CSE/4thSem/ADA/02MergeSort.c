@@ -57,7 +57,7 @@ void mergesort(int low, int high)
 	if(low < high)
 	{
 		mid = (low + high) / 2;
-		#pragma omp task
+                #pragma omp task
 		{
 			mergesort(low, mid);
 		}
@@ -82,9 +82,14 @@ int main(int argc, char *argv[])
 		a[i] = (rand() % size);
 		printf("%d\t", a[i]);
 	}
+	printf("\n");
 	start_time = omp_get_wtime();
 	mergesort(0, size - 1);
+	for (i = 0; i < size; ++i)
+	{
+		printf("%d\t", a[i]);
+	}
 	end_time = omp_get_wtime();
-	printf("Elapse time is %d\n",end_time - start_time);
+	printf("Elapse time is %lf\n",(end_time - start_time));
 	return 0;
 }
