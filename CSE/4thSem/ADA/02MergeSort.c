@@ -57,11 +57,11 @@ void mergesort(int low, int high)
 	if(low < high)
 	{
 		mid = (low + high) / 2;
-                #pragma omp task
+#pragma omp task
 		{
 			mergesort(low, mid);
 		}
-		#pragma omp task
+#pragma omp task
 		{
 			mergesort(mid + 1, high);
 		}

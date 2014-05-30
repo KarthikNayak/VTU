@@ -1,4 +1,6 @@
-/*Programme to check if a graph is connected using DFS traversal*/
+/*
+ * Programme to check if a graph is connected using DFS traversal
+ */
 
 
 #include<stdio.h>

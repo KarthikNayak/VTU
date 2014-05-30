@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	long int arr[1000000], i, no;
 	float start, end;
 	printf ("Enter no of elements\n");
-	scanf("%d", no);
+	scanf("%ld", &no);
 	srand(no);
 	for(i = 0; i < no; i++)
 		arr[i] = rand()%1000;
