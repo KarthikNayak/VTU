@@ -22,8 +22,8 @@ int main()
 			system(line);
 			free(line);
 			line = NULL;
-			len = 0;		
-		}		
+			len = 0;
+		}
 	}
 	else {
 		wait(&x);

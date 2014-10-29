@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -20,4 +19,6 @@ int main()
         printf("Parent PID: %ld\n", (long) getpid());
         printf("Child PID: %ld\n", (long) pid);
     }
+
+    return 0;
 }
