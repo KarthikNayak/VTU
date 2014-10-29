@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 int main(int argc, char *argv[])
@@ -12,6 +13,6 @@ int main(int argc, char *argv[])
 	write(fd, ran, 16);
 	lseek(fd, 32, SEEK_CUR);
 	write(fd, ran, 16);
-		
+	system("vi test");
 	return 0;
 }
