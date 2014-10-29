@@ -20,4 +20,6 @@ int main()
         printf("Parent PID: %ld\n", (long) getpid());
         printf("Child PID: %ld\n", (long) pid);
     }
+
+    return 0;
 }
