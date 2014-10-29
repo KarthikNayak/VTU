@@ -3,10 +3,9 @@ if [ $# -eq 0 ]; then
     exit
 fi
 
-rm -f generator.sh
 for file in $@
 do
-    content=`cat $file`
-    # FIX: Messes up with files with quotes
-    echo "echo \"$content\" > $file" >> generator.sh
-done
+    echo "cat << FileInputDelimiter > $file
+`cat $file`
+FileInputDelimiter"
+done > generator.sh
