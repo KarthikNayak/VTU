@@ -23,7 +23,7 @@ main()
 yyerror()
 {
 printf("invalid string\n");
-return 0;
+exit(0);
 }
 yywrap()
 {

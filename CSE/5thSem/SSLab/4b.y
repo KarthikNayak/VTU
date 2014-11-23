@@ -1,5 +1,6 @@
 %{
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 %}
 %token C N
 %%
@@ -17,7 +18,7 @@ printf("valid string\n");
 yyerror()
 {
 printf("invalid string\n");
-return 0;
+exit(0);
 }
 yywrap()
 {
