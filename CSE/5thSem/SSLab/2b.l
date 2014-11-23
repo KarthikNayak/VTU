@@ -19,5 +19,5 @@ int main()
     }
 int yywrap()
     {
-	return 0;
+	return 1;
     }
