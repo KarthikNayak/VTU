@@ -10,8 +10,7 @@ int main(int argc, char *argv[])
 {
     printf("Enter the String\n");
     yylex();
-    lb = lb > rb ? lb : rb;
-    printf("C : %d\n", c + lb);
+    printf("No of operators : %d, No of operands : %d\n", sym, op);
     return 0;
 }
 
